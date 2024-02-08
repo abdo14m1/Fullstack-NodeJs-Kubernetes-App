@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: amigos
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: react-app
+    version: "1"
+    tier: frontend
+  name: react-deployment
+  namespace: amigos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-app
+      version: "1"
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: react-app
+        version: "1"
+        tier: frontend
+    spec:
+      containers:
+      - image: amigoscode/kubernetes:frontend-v1
+        name: kubernetes
+        ports: 
+        - containerPort: 80
+        resources:
+          limits: 
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: amigos
+  name: frontend-srvc
+spec:
+  selector:
+    app: react-app
+    version: "1"
+    tier: frontend
+  ports:
+  - port: 80 
+    targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: amigos
+  name: amigos-ingress
+  labels:
+    name: amigos-ingress
+spec:
+  rules:
+  - host: amigos.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: frontend-srvc
+            port: 
+              number: 80
+
+
+
