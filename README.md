@@ -1,3 +1,4 @@
 # Fullstack-kubernetes-app
 Full stack project deployed with K8S using Deployments and Services and Ingress
-![project scheme](https://github.com/abdo14m1/fullstack-kubernetes-app/blob/0c40ba3b97a2256b0eb90d34093f71410b154fc2/k8s-fullstack-exercise.png)
+![image](https://github.com/abdo14m1/Fullstack-NodeJs-Kubernetes-App/assets/154431880/9e06119b-f1c2-445b-91f2-583603752dc4)
+
